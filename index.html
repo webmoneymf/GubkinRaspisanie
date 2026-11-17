@@ -1,0 +1,70 @@
+<!doctype html>
+<html lang="ru">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="theme-color" content="#102b46">
+  <meta name="description" content="Удобное расписание занятий филиала Губкинского университета в Оренбурге.">
+  <title>Расписание — Губкинский университет, Оренбург</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Manrope:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+  <div class="app-shell">
+    <header class="topbar">
+      <a class="brand" href="#" aria-label="На главную">
+        <span class="brand-mark">Г</span>
+        <span><b>Губкинский</b><small>УНИВЕРСИТЕТ · ОРЕНБУРГ</small></span>
+      </a>
+      <div class="topbar-right">
+        <span class="live-dot"></span><span class="topbar-caption">Официальное расписание</span>
+        <a class="source-link" href="https://lk.gubkin.ru/schedule/#/activities/faculties" target="_blank" rel="noreferrer">Личный кабинет ↗</a>
+      </div>
+    </header>
+
+    <main>
+      <section class="intro">
+        <div class="eyebrow">УЧЕБНЫЙ ПРОЦЕСС · 2026/27</div>
+        <h1>Расписание занятий<span>.</span></h1>
+        <p>Всё необходимое для учебной недели — в одном месте.</p>
+      </section>
+
+      <section class="toolbar">
+        <div class="group-select-wrap">
+          <label for="groupSelect">Учебная группа</label>
+          <select id="groupSelect" disabled><option>Загрузка списка групп…</option></select>
+        </div>
+        <div class="toolbar-actions">
+          <span id="updatedAt" class="updated">Обновление ещё не выполнялось</span>
+          <button id="refreshBtn" class="refresh-btn" type="button" title="Обновить расписание"><span aria-hidden="true">↻</span> Обновить</button>
+        </div>
+      </section>
+
+      <div id="notice" class="notice" role="status" hidden></div>
+
+      <section class="schedule-section">
+        <div class="section-heading">
+          <div><div class="eyebrow">ВАША НЕДЕЛЯ</div><h2 id="weekTitle">Расписание</h2></div>
+          <div class="view-switch" role="group" aria-label="Режим просмотра">
+            <button class="view-btn active" data-view="week" type="button">Неделя</button>
+            <button class="view-btn" data-view="day" type="button">День</button>
+          </div>
+        </div>
+        <nav id="dayTabs" class="day-tabs" aria-label="Дни недели"></nav>
+        <div id="schedule" class="schedule-grid" aria-live="polite">
+          <div class="empty-state"><span class="loader"></span><b>Загружаем расписание</b><small>Подключаемся к серверу университета</small></div>
+        </div>
+      </section>
+
+      <footer>
+        <span>Данные предоставляются официальной системой Губкинского университета.</span>
+        <span id="connectionState">Проверка соединения…</span>
+      </footer>
+    </main>
+  </div>
+  <script src="config.js"></script>
+  <script src="app.js"></script>
+</body>
+</html>
