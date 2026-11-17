@@ -67,17 +67,26 @@ function fillUrl(template, groupId) {
   }
 
   function normalizeGroups(payload) {
-    const candidate = pathValue(payload, cfg.responsePaths.groups) ?? payload?.data ?? payload;
-    const list = Array.isArray(candidate) ? candidate :
-      Array.isArray(candidate?.groups) ? candidate.groups :
-      Array.isArray(candidate?.items) ? candidate.items : [];
-    return list.map((g) => ({
-      id: String(g.id ?? g.groupId ?? ""),
-      code: String(g.code ?? g.name ?? g.title ?? g.number ?? ""),
-      facultyId: g.facultyId == null ? null : Number(g.facultyId),
-      raw: g
-    })).filter(g => g.id && g.code && (g.facultyId == null || g.facultyId === Number(cfg.facultyId)));
-  }
+  const candidate =
+    pathValue(payload, cfg.responsePaths.groups) ??
+    payload?.rows ??
+    payload?.data ??
+    payload;
+
+  const list = Array.isArray(candidate) ? candidate :
+    Array.isArray(candidate?.groups) ? candidate.groups :
+    Array.isArray(candidate?.items) ? candidate.items : [];
+
+  return list.map((g) => ({
+    id: String(g.id ?? g.groupId ?? ""),
+    code: String(g.code ?? g.name ?? g.title ?? g.number ?? ""),
+    facultyId: g.facultyId == null ? null : Number(g.facultyId),
+    raw: g
+  })).filter(g =>
+    g.id && g.code &&
+    (g.facultyId == null || g.facultyId === Number(cfg.facultyId))
+  );
+}
 
   function normalizeSchedule(payload) {
     const rows = pathValue(payload, cfg.responsePaths.schedule) ?? payload?.data ?? payload;
