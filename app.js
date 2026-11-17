@@ -25,12 +25,20 @@
     return (path || "").split(".").filter(Boolean).reduce((v, k) => v == null ? undefined : v[k], obj);
   }
 
-  function fillUrl(template, groupId) {
-    return template
-      .replaceAll("{{studyId}}", encodeURIComponent(cfg.studyId))
-      .replaceAll("{{facultyId}}", encodeURIComponent(cfg.facultyId))
-      .replaceAll("{{groupId}}", encodeURIComponent(groupId));
-  }
+function fillUrl(template, groupId) {
+  const date = new Date();
+  const dateString = [
+    date.getFullYear(),
+    String(date.getMonth() + 1).padStart(2, "0"),
+    String(date.getDate()).padStart(2, "0")
+  ].join("-");
+
+  return template
+    .replaceAll("{{studyId}}", encodeURIComponent(cfg.studyId))
+    .replaceAll("{{facultyId}}", encodeURIComponent(cfg.facultyId))
+    .replaceAll("{{groupId}}", encodeURIComponent(groupId))
+    .replaceAll("{{date}}", encodeURIComponent(dateString));
+}
 
   async function request(url) {
     const controller = new AbortController();
