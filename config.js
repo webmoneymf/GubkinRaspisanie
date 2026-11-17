@@ -6,11 +6,8 @@ window.GUBKIN_CONFIG = {
   refreshIntervalMs: 120000,
   requestTimeoutMs: 15000,
   endpoints: {
-    groups: "https://lk.gubkin.ru/schedule/api/api.php?act=list&method=getFacultyGroups&facultyId=15",
-    schedule: "https://lk.gubkin.ru/schedule/api/api.php?act=schedule&date={{date}}&groupId={{groupId}}"
-  },
-  responsePaths: {
-    groups: "rows",
-    schedule: "rows"
+    groups: "https://gubkin-schedule-proxy.markderden17.workers.dev/?act=list",
+    schedule: "https://gubkin-schedule-proxy.markderden17.workers.dev/?act=schedule&date={{date}}&groupId={{groupId}}"
   }
 };
+
